@@ -1,6 +1,8 @@
 use std::env;
 use std::process;
 use intro::spin;
+use intro::mem;
+use intro::mythreads;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -11,10 +13,14 @@ fn main() {
     }
 
     let myString = &args[1];
+    let mut my_int = myString.parse::<u32>().unwrap();
+
+    mythreads(my_int);
 
     loop {
         spin(1);
-        println!("myString: {}", myString);
+        mem(&my_int);
+        my_int += 1;
     }
         
 }
